@@ -57,4 +57,4 @@ const createDescription = () => {
 };
 
 
-console.log(createDescription());
+export { createComments, createDescription };
