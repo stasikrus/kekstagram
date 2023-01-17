@@ -1,5 +1,6 @@
 const fullPicture = document.querySelector('.big-picture');
 const closePreview = fullPicture.querySelector('.big-picture__cancel');
+const comment = fullPicture.querySelector('.social_comment');
 
 // Открыть большое изображение
 
@@ -23,5 +24,13 @@ const show = (picture) => {
 export { show, openPreview };
 
 
+const getComments = (picture) => {
+  for (let i = 0; i < picture.comments.length; i++) {
+    const commentElement = comment.cloneNode(true);
 
+    commentElement.querySelector('.social_picture').src = picture.comments.avatar;
+
+  }
+
+};
 
