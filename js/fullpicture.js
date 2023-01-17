@@ -1,25 +1,26 @@
 const fullPicture = document.querySelector('.big-picture');
-const picture = document.querySelectorAll('.picture');
-const closeButton = fullPicture.querySelector('.big-picture__cancel');
+const closePreview = fullPicture.querySelector('.big-picture__cancel');
 
 // Открыть большое изображение
 
-  picture.forEach(gallery => {
-   gallery.addEventListener('click', function (evt) {
-   evt.preventDefault();
-   fullPicture.classList.remove('hidden');
-   const photo = picture.querySelector('.picture__img');
-   const show = photo.getAttribute('src');
+
+const openPreview = () => {
+  fullPicture.classList.remove('hidden');
+};
+
+const show = (picture) => {
+  fullPicture.querySelector('.big-picture__img > img').src = picture.url;
+  fullPicture.querySelector('.likes-count').textContent = picture.likes;
+  fullPicture.querySelector('.comments-count').textContent = picture.comments.length;
+  fullPicture.querySelector('.social__caption').textContent = picture.description;
+
+  closePreview.addEventListener('click', function () {
+    fullPicture.classList.add('hidden');
+  });
+}
 
 
-   console.log(show);
-   });
- });
-
-
-closeButton.addEventListener('click', function () {
-  fullPicture.classList.add('hidden');
-});
+export { show, openPreview };
 
 
 
