@@ -1,13 +1,58 @@
 const fullPicture = document.querySelector('.big-picture');
 const closePreview = fullPicture.querySelector('.big-picture__cancel');
-const comment = fullPicture.querySelector('.social_comment');
+const commentsList = fullPicture.querySelector('.social__comments');
+const commentTemplate = document.querySelector('.social__comment');
+const commentCount = fullPicture.querySelector('.social__comment-count');
+const commentsLoader = fullPicture.querySelector('.comments-loader');
+const bodyHtml = document.querySelector('body');
+
+console.log(commentTemplate);
 
 // Открыть большое изображение
 
-
 const openPreview = () => {
+  commentsList.innerHTML = '';
   fullPicture.classList.remove('hidden');
 };
+
+const hiddenBlocks = () => {
+  commentCount.classList.add('hidden');
+  commentsLoader.classList.add('hidden');
+};
+
+const scrollOff = () => {
+  bodyHtml.classList.add('modal-open');
+};
+
+const closePopup = () => {
+  fullPicture.classList.add('hidden');
+  commentCount.classList.remove('hidden');
+  commentsLoader.classList.remove('hidden');
+  bodyHtml.classList.remove('modal-open');
+  commentsList.innerHTML = '';
+};
+
+
+const createComments = (comment) => {
+  const commentElement = commentTemplate.cloneNode(true);
+
+  commentElement.querySelector('.social__picture').src = comment.avatar;
+  commentElement.querySelector('.social__picture').alt = comment.name;
+  commentElement.querySelector('.social__text').textContent = comment.message;
+
+  return commentElement;
+};
+
+const getComments = (comments) => {
+  let commentListFragment = document.createDocumentFragment();
+
+  comments.forEach(comment => {
+    commentListFragment.appendChild(createComments(comment));
+  });
+
+  commentsList.appendChild(commentListFragment);
+};
+
 
 const show = (picture) => {
   fullPicture.querySelector('.big-picture__img > img').src = picture.url;
@@ -15,22 +60,11 @@ const show = (picture) => {
   fullPicture.querySelector('.comments-count').textContent = picture.comments.length;
   fullPicture.querySelector('.social__caption').textContent = picture.description;
 
-  closePreview.addEventListener('click', function () {
-    fullPicture.classList.add('hidden');
+  closePreview.addEventListener('click', () => {
+    closePopup()
   });
-}
-
-
-export { show, openPreview };
-
-
-const getComments = (picture) => {
-  for (let i = 0; i < picture.comments.length; i++) {
-    const commentElement = comment.cloneNode(true);
-
-    commentElement.querySelector('.social_picture').src = picture.comments.avatar;
-
-  }
-
 };
 
+
+
+export { show, openPreview, getComments, hiddenBlocks, scrollOff };

@@ -1,9 +1,8 @@
 import { createDescription } from './data.js';
-import { show, openPreview } from './fullpicture.js';
+import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullpicture.js';
 
 const list = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
-
 
 const createPicture = createDescription();
 
@@ -20,7 +19,10 @@ createPicture.forEach((picture) => {
   pictureElement.addEventListener('click', (evt) => {
     evt.preventDefault();
     openPreview();
+    hiddenBlocks();
+    scrollOff();
     show(picture);
+    getComments(picture.comments);
   });
 
   similarListFragment.appendChild(pictureElement);
@@ -28,5 +30,3 @@ createPicture.forEach((picture) => {
 });
 
 list.appendChild(similarListFragment);
-
-
