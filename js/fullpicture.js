@@ -32,22 +32,17 @@ const closePopup = () => {
   commentsList.innerHTML = '';
 };
 
-
-const createComments = (comment) => {
-  const commentElement = commentTemplate.cloneNode(true);
-
-  commentElement.querySelector('.social__picture').src = comment.avatar;
-  commentElement.querySelector('.social__picture').alt = comment.name;
-  commentElement.querySelector('.social__text').textContent = comment.message;
-
-  return commentElement;
-};
-
 const getComments = (comments) => {
   let commentListFragment = document.createDocumentFragment();
 
   comments.forEach(comment => {
-    commentListFragment.appendChild(createComments(comment));
+    const commentElement = commentTemplate.cloneNode(true);
+
+    commentElement.querySelector('.social__picture').src = comment.avatar;
+    commentElement.querySelector('.social__picture').alt = comment.name;
+    commentElement.querySelector('.social__text').textContent = comment.message;
+
+    commentListFragment.appendChild(commentElement);
   });
 
   commentsList.appendChild(commentListFragment);
@@ -63,8 +58,12 @@ const show = (picture) => {
   closePreview.addEventListener('click', () => {
     closePopup()
   });
+  document.addEventListener('keyup', (evt) => {
+    if (evt.key === "Escape") {
+      closePopup()
+    }
+  });
+
 };
-
-
 
 export { show, openPreview, getComments, hiddenBlocks, scrollOff };
