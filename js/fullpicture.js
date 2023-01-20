@@ -6,8 +6,6 @@ const commentCount = fullPicture.querySelector('.social__comment-count');
 const commentsLoader = fullPicture.querySelector('.comments-loader');
 const bodyHtml = document.querySelector('body');
 
-console.log(commentTemplate);
-
 // Открыть большое изображение
 
 const openPreview = () => {
@@ -66,4 +64,4 @@ const show = (picture) => {
 
 };
 
-export { show, openPreview, getComments, hiddenBlocks, scrollOff };
+export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml };
