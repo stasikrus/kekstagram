@@ -7,7 +7,9 @@ const closeButton = createForm.querySelector('.img-upload__cancel');
 const buttonSmaller = createForm.querySelector('.scale__control--smaller');
 const buttonBigger = createForm.querySelector('.scale__control--bigger');
 let scaleValue = createForm.querySelector('.scale__control--value');
-const imgPreview = createForm.querySelector('.img-upload__preview');
+const imgPreview = createForm.querySelector('.img-upload__preview > img');
+const filterList = createForm.querySelector('.effects__list');
+const filterInput = filterList.querySelectorAll('.effects__radio');
 
 
 const showFormCreate = () => {
@@ -56,6 +58,23 @@ const changeScale = (scale) => {
 
 };
 
+const changeFilter = () => {
+   const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat']
+   for (let i = 0; i < filterInput.length; i++) {
+    filterInput[i].addEventListener('change', () => {
+        imgPreview.classList.toggle(filterBase[i]);
+        console.log(filterBase[2]);
+    })
+
+
+
+
+   }
+
+
+
+};
+
 uploadFile.addEventListener('change', () => {
   showFormCreate();
   changeScale(100);
@@ -72,6 +91,6 @@ uploadFile.addEventListener('change', () => {
 });
 
 
-
+changeFilter();
 
 
