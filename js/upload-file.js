@@ -10,6 +10,8 @@ let scaleValue = createForm.querySelector('.scale__control--value');
 const imgPreview = createForm.querySelector('.img-upload__preview > img');
 const filterList = createForm.querySelector('.effects__list');
 const filterInput = filterList.querySelectorAll('.effects__radio');
+const slider = createForm.querySelector('.effect-level__slider');
+const valueElement = createForm.querySelector('.effect-level__value');
 
 
 const showFormCreate = () => {
@@ -59,21 +61,28 @@ const changeScale = (scale) => {
 };
 
 const changeFilter = () => {
-   const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat']
+   const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
    for (let i = 0; i < filterInput.length; i++) {
     filterInput[i].addEventListener('change', () => {
-        imgPreview.classList.toggle(filterBase[i]);
-        console.log(filterBase[2]);
-    })
-
-
-
-
-   }
-
-
-
+      imgPreview.removeAttribute('class');
+      imgPreview.classList.add(filterBase[i]);
+    });
+  };
 };
+
+noUiSlider.create(slider, {
+  start: [80],
+  step: 1,
+  connect: 'lower',
+  range: {
+      'min': 0,
+      'max': 100
+  }
+});
+
+slider.noUiSlider.on('update', (_, handle, unencoded) => {
+  valueElement.value = unencoded[handle];
+});
 
 uploadFile.addEventListener('change', () => {
   showFormCreate();
