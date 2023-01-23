@@ -12,6 +12,7 @@ const filterList = createForm.querySelector('.effects__list');
 const filterInput = filterList.querySelectorAll('.effects__radio');
 const slider = createForm.querySelector('.effect-level__slider');
 const valueElement = createForm.querySelector('.effect-level__value');
+const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
 
 
 const showFormCreate = () => {
@@ -60,18 +61,67 @@ const changeScale = (scale) => {
 
 };
 
+
 const changeFilter = () => {
-   const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
    for (let i = 0; i < filterInput.length; i++) {
     filterInput[i].addEventListener('change', () => {
       imgPreview.removeAttribute('class');
       imgPreview.classList.add(filterBase[i]);
+
+      const x = filterBase;
+      switch(x[i]) {
+        case x[1]:
+          slider.noUiSlider.updateOptions({
+            range: {
+                min: 0,
+                max: 1,
+            },
+            step: 0.1,
+          });
+          break;
+        case x[2]:
+          slider.noUiSlider.updateOptions({
+            range: {
+                min: 0,
+                max: 1,
+            },
+            step: 0.1,
+          });
+          break;
+        case x[3]:
+          slider.noUiSlider.updateOptions({
+            range: {
+                min: 0,
+                max: 100,
+            },
+            step: 1,
+          });
+          break;
+        case x[4]:
+          slider.noUiSlider.updateOptions({
+            range: {
+                min: 0,
+                max: 3,
+            },
+            step: 0.1,
+          });
+          break;
+        case x[5]:
+          slider.noUiSlider.updateOptions({
+            range: {
+                min: 1,
+                max: 3,
+            },
+            step: 0.1,
+            });
+            break;
+      }
     });
   };
 };
 
 noUiSlider.create(slider, {
-  start: [80],
+  start: [1],
   step: 1,
   connect: 'lower',
   range: {
@@ -82,6 +132,7 @@ noUiSlider.create(slider, {
 
 slider.noUiSlider.on('update', (_, handle, unencoded) => {
   valueElement.value = unencoded[handle];
+  console.log(valueElement.value);
 });
 
 uploadFile.addEventListener('change', () => {
