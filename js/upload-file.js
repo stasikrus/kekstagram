@@ -13,11 +13,12 @@ const filterInput = filterList.querySelectorAll('.effects__radio');
 const slider = createForm.querySelector('.effect-level__slider');
 const valueElement = createForm.querySelector('.effect-level__value');
 const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
-
+const filterField = createForm.querySelector('.img-upload__effect-level');
 
 const showFormCreate = () => {
   createForm.classList.remove('hidden');
   bodyHtml.classList.add('modal-open');
+  filterField.classList.add('hidden');
 };
 
 const closeFormCreate = () => {
@@ -61,12 +62,13 @@ const changeScale = (scale) => {
 
 };
 
-
 const changeFilter = () => {
-   for (let i = 0; i < filterInput.length; i++) {
+
+  for (let i = 0; i < filterInput.length; i++) {
     filterInput[i].addEventListener('change', () => {
-      imgPreview.removeAttribute('class');
-      imgPreview.classList.add(filterBase[i]);
+    imgPreview.removeAttribute('class');
+    imgPreview.classList.add(filterBase[i]);
+    filterField.classList.remove('hidden');
 
       const x = filterBase;
       switch(x[i]) {
@@ -78,6 +80,7 @@ const changeFilter = () => {
             },
             step: 0.1,
           });
+          filterCount(x[1]);
           break;
         case x[2]:
           slider.noUiSlider.updateOptions({
@@ -87,6 +90,7 @@ const changeFilter = () => {
             },
             step: 0.1,
           });
+          filterCount(x[2]);
           break;
         case x[3]:
           slider.noUiSlider.updateOptions({
@@ -96,6 +100,7 @@ const changeFilter = () => {
             },
             step: 1,
           });
+          filterCount(x[3]);
           break;
         case x[4]:
           slider.noUiSlider.updateOptions({
@@ -105,6 +110,7 @@ const changeFilter = () => {
             },
             step: 0.1,
           });
+          filterCount(x[4]);
           break;
         case x[5]:
           slider.noUiSlider.updateOptions({
@@ -114,14 +120,19 @@ const changeFilter = () => {
             },
             step: 0.1,
             });
+            filterCount(x[5]);
             break;
-      }
+        }
     });
   };
+  filterInput[0].addEventListener('click', () => {
+    imgPreview.removeAttribute('style');
+    filterField.classList.add('hidden');
+  });
 };
 
 noUiSlider.create(slider, {
-  start: [1],
+  start: [0],
   step: 1,
   connect: 'lower',
   range: {
@@ -130,10 +141,31 @@ noUiSlider.create(slider, {
   }
 });
 
-slider.noUiSlider.on('update', (_, handle, unencoded) => {
+const filterCount = (filter) => {
+  slider.noUiSlider.on('update', (_, handle, unencoded) => {
   valueElement.value = unencoded[handle];
-  console.log(valueElement.value);
-});
+
+  switch(filter) {
+    case filterBase[1]:
+      imgPreview.style.filter = `grayscale(${valueElement.value})`;
+      break;
+    case filterBase[2]:
+      imgPreview.style.filter = `sepia(${valueElement.value})`;
+      break;
+    case filterBase[3]:
+      imgPreview.style.filter = `invert(${valueElement.value}%)`;
+      break;
+    case filterBase[4]:
+      imgPreview.style.filter = `blur(${valueElement.value}px)`;
+      break;
+    case filterBase[5]:
+      imgPreview.style.filter = `brightness(${valueElement.value})`;
+      break;
+    }
+  });
+}
+
+
 
 uploadFile.addEventListener('change', () => {
   showFormCreate();
@@ -152,5 +184,5 @@ uploadFile.addEventListener('change', () => {
 
 
 changeFilter();
-
+console.log(valueElement.value);
 
