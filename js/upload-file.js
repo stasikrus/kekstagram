@@ -14,6 +14,11 @@ const slider = createForm.querySelector('.effect-level__slider');
 const valueElement = createForm.querySelector('.effect-level__value');
 const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
 const filterField = createForm.querySelector('.img-upload__effect-level');
+const tagsInput = createForm.querySelector('.text__hashtags');
+const Keys = {
+  ESC: 'Esc',
+  ESCAPE: 'Escape',
+};
 
 const showFormCreate = () => {
   createForm.classList.remove('hidden');
@@ -27,6 +32,8 @@ const closeFormCreate = () => {
   uploadFile.value = '';
   scaleValue.value = '';
   imgPreview.style.transform = '';
+  imgPreview.removeAttribute('class');
+  imgPreview.removeAttribute('style');
 };
 
 
@@ -79,6 +86,7 @@ const changeFilter = () => {
                 max: 1,
             },
             step: 0.1,
+            start: [1],
           });
           filterCount(x[1]);
           break;
@@ -89,6 +97,7 @@ const changeFilter = () => {
                 max: 1,
             },
             step: 0.1,
+            start: [1],
           });
           filterCount(x[2]);
           break;
@@ -99,6 +108,7 @@ const changeFilter = () => {
                 max: 100,
             },
             step: 1,
+            start: [100],
           });
           filterCount(x[3]);
           break;
@@ -109,6 +119,7 @@ const changeFilter = () => {
                 max: 3,
             },
             step: 0.1,
+            start: [3],
           });
           filterCount(x[4]);
           break;
@@ -119,6 +130,7 @@ const changeFilter = () => {
                 max: 3,
             },
             step: 0.1,
+            start: [3],
             });
             filterCount(x[5]);
             break;
@@ -170,13 +182,15 @@ const filterCount = (filter) => {
 uploadFile.addEventListener('change', () => {
   showFormCreate();
   changeScale(100);
+  checkChashtags();
+  validateHashtags();
 
   closeButton.addEventListener('click', () => {
     closeFormCreate();
   });
 
   document.addEventListener('keyup', (evt) => {
-    if (evt.key === "Escape") {
+    if (evt.key === Keys.ESC || evt.key === Keys.ESCAPE) {
       closeFormCreate();
     }
   });
@@ -184,5 +198,3 @@ uploadFile.addEventListener('change', () => {
 
 
 changeFilter();
-console.log(valueElement.value);
-
