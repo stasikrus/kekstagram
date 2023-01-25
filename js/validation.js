@@ -1,3 +1,5 @@
+import { Keys } from "./upload-file.js";
+
 let MAX_SYMBOLS = 20;
 let MAX_HASHTAGS = 5;
 let MAX_COMMENTLENGTH = 140;
@@ -70,4 +72,14 @@ inputHashtag.addEventListener('input', () => {
   }
 })
 
+inputHashtag.addEventListener('keyup', (evt) => {
+  if (evt.key === Keys.ESC || evt.key === Keys.ESCAPE) {
+    evt.stopPropagation();
+  };
+})
 
+inputComment.addEventListener('keyup', (evt) => {
+  if (evt.key === Keys.ESC || evt.key === Keys.ESCAPE) {
+    evt.stopPropagation();
+  };
+})

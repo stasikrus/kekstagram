@@ -14,7 +14,6 @@ const slider = createForm.querySelector('.effect-level__slider');
 const valueElement = createForm.querySelector('.effect-level__value');
 const filterBase = ['', 'effects__preview--chrome', 'effects__preview--sepia', 'effects__preview--marvin', 'effects__preview--phobos', 'effects__preview--heat'];
 const filterField = createForm.querySelector('.img-upload__effect-level');
-const tagsInput = createForm.querySelector('.text__hashtags');
 const Keys = {
   ESC: 'Esc',
   ESCAPE: 'Escape',
@@ -178,12 +177,11 @@ const filterCount = (filter) => {
 }
 
 
-
 uploadFile.addEventListener('change', () => {
   showFormCreate();
   changeScale(100);
-  checkChashtags();
-  validateHashtags();
+
+
 
   closeButton.addEventListener('click', () => {
     closeFormCreate();
@@ -198,3 +196,5 @@ uploadFile.addEventListener('change', () => {
 
 
 changeFilter();
+
+export { Keys };
