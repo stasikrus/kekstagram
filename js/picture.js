@@ -1,15 +1,17 @@
 import { createDescription } from './data.js';
 import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullpicture.js';
+import { createFetch } from './api.js';
+
 
 const list = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
-const createPicture = createDescription();
-
-const similarListFragment = document.createDocumentFragment();
 
 
-createPicture.forEach((picture) => {
+const createPicture = (photo) => {
+  const similarListFragment = document.createDocumentFragment();
+
+  photo.forEach((picture) => {
   const pictureElement = pictureTemplate.cloneNode(true);
 
   pictureElement.querySelector('.picture__img').src = picture.url;
@@ -27,6 +29,10 @@ createPicture.forEach((picture) => {
 
   similarListFragment.appendChild(pictureElement);
 
-});
+  });
 
-list.appendChild(similarListFragment);
+  list.appendChild(similarListFragment);
+};
+
+
+export { createPicture };

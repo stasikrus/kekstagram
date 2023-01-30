@@ -33,7 +33,7 @@ const closePopup = () => {
 const getComments = (comments) => {
   let commentListFragment = document.createDocumentFragment();
 
-  comments.forEach(comment => {
+  comments.forEach((comment) => {
     const commentElement = commentTemplate.cloneNode(true);
 
     commentElement.querySelector('.social__picture').src = comment.avatar;
