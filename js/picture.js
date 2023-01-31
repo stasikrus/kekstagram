@@ -1,6 +1,4 @@
-import { createDescription } from './data.js';
 import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullpicture.js';
-import { createFetch } from './api.js';
 
 
 const list = document.querySelector('.pictures');
