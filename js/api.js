@@ -1,5 +1,9 @@
 import {showAlert} from './util.js';
-import { closePopup } from "./fullpicture.js";
+
+const userForm = document.querySelector('.img-upload__form');
+const sucessTemplate = document.querySelector('#success').content.querySelector('.success');
+const inputHashtag = document.querySelector('.text__hashtags');
+const inputComment = document.querySelector('.text__description');
 
 const checkStatus = (response) => {
   if (response.ok) {
@@ -9,6 +13,23 @@ const checkStatus = (response) => {
   const {statusText, status} = response;
   throw new Error(`${status} — ${statusText}`);
 }
+
+const sucessMessage = () => {
+  const sucessElement = sucessTemplate.cloneNode(true);
+  document.body.insertBefore(sucessElement, document.body.lastChild);
+
+  const sucessClose = sucessElement.querySelector('.success__button');
+
+  sucessClose.addEventListener('click', () => {
+    sucessElement.remove();
+  })
+}
+
+const clearInput = () => {
+  inputComment.value = '';
+  inputHashtag.value = '';
+}
+
 
 const getData = (onSuccess) => {
   fetch('https://23.javascript.pages.academy/kekstagram/data')
@@ -22,7 +43,7 @@ const getData = (onSuccess) => {
 
 }
 
-const postData = (onSuccess) =>{
+const postData = (onSuccess) => {
   userForm.addEventListener('submit', (evt) => {
    evt.preventDefault();
 
@@ -38,6 +59,8 @@ const postData = (onSuccess) =>{
     .then((response) => {
       if (response.ok) {
         onSuccess();
+        sucessMessage();
+        clearInput();
       } else {
         showAlert('Не удалось отправить форму. Попробуйте ещё раз');
       }

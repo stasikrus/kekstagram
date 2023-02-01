@@ -154,7 +154,7 @@ noUiSlider.create(slider, {
 
 const filterCount = (filter) => {
   slider.noUiSlider.on('update', (_, handle, unencoded) => {
-  valueElement.value = unencoded[handle];
+    valueElement.value = unencoded[handle];
 
   switch(filter) {
     case filterBase[1]:
@@ -197,4 +197,4 @@ uploadFile.addEventListener('change', () => {
 
 changeFilter();
 
-export { Keys };
+export { Keys, closeFormCreate };
