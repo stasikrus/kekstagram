@@ -64,4 +64,4 @@ const show = (picture) => {
 
 };
 
-export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml };
+export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml, closePopup };

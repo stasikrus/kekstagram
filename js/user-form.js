@@ -1,5 +1,6 @@
 import { Keys } from "./upload-file.js";
 
+const userForm = document.querySelector('.img-upload__form');
 let MAX_SYMBOLS = 20;
 let MAX_HASHTAGS = 5;
 let MAX_COMMENTLENGTH = 140;
@@ -83,3 +84,17 @@ inputComment.addEventListener('keyup', (evt) => {
     evt.stopPropagation();
   };
 })
+
+userForm.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  const formData = new FormData(evt.target);
+
+  fetch(
+    'https://23.javascript.pages.academy/kekstagram',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  );
+});
