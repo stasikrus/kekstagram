@@ -5,6 +5,9 @@ import { getData, postData } from './api.js';
 import './validation.js';
 import { closeFormCreate } from "./upload-file.js";
 
+//const RERENDER_DELAY = 500;
+
+
 getData((photos) => {
   createPicture(photos);
 });

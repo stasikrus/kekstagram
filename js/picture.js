@@ -3,8 +3,12 @@ import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullp
 
 const list = document.querySelector('.pictures');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
+const imgFilters = document.querySelector('.img-filters');
+const filterDefault = document.getElementById('filter-default');
+const filterRandom = document.getElementById('filter-random');
+const filterDiscussed = document.getElementById('filter-discussed');
 
-
+console.log(filterDiscussed);
 
 const createPicture = (photo) => {
   const similarListFragment = document.createDocumentFragment();
@@ -30,6 +34,7 @@ const createPicture = (photo) => {
   });
 
   list.appendChild(similarListFragment);
+  imgFilters.classList.remove('img-filters--inactive');
 };
 
 
