@@ -1,14 +1,15 @@
 import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullpicture.js';
+import { getRandomIntInclusive } from './util.js';
 
 
 const list = document.querySelector('.pictures');
+const puctureItem = list.querySelectorAll('.picture');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const imgFilters = document.querySelector('.img-filters');
 const filterDefault = document.getElementById('filter-default');
 const filterRandom = document.getElementById('filter-random');
 const filterDiscussed = document.getElementById('filter-discussed');
 
-console.log(filterDiscussed);
 
 const createPicture = (photo) => {
   const similarListFragment = document.createDocumentFragment();
@@ -38,4 +39,25 @@ const createPicture = (photo) => {
 };
 
 
-export { createPicture };
+const setRandomClick = (photos) => {
+  let randomList = [];
+
+  filterRandom.addEventListener('click', () => {
+    list.innerHTML = '';
+    for (let i = 0; i < 10; i++) {
+      randomList.push(photos[getRandomIntInclusive(0, photos.length)]);
+    }
+    console.log(randomList);
+    createPicture(randomList);
+  });
+};
+
+const setDefaultClick = (photos) => {
+
+  filterDefault.addEventListener('click', () => {
+    createPicture(photos);
+  });
+};
+
+
+export { createPicture, setRandomClick, setDefaultClick };

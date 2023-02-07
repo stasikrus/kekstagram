@@ -1,4 +1,4 @@
-import { createPicture } from './picture.js';
+import { createPicture, setRandomClick, setDefaultClick } from './picture.js';
 import './fullpicture.js';
 import './upload-file.js';
 import { getData, postData } from './api.js';
@@ -10,6 +10,9 @@ import { closeFormCreate } from "./upload-file.js";
 
 getData((photos) => {
   createPicture(photos);
+  setRandomClick(photos);
+  setDefaultClick(photos);
 });
 
 postData(closeFormCreate);
+
