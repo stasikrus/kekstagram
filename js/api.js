@@ -1,7 +1,10 @@
 import {showAlert} from './util.js';
+import { closeFormCreate } from './upload-file.js';
+import { Keys } from './upload-file.js';
 
 const userForm = document.querySelector('.img-upload__form');
 const sucessTemplate = document.querySelector('#success').content.querySelector('.success');
+const errorTemplate = document.querySelector('#error').content.querySelector('.error');
 const inputHashtag = document.querySelector('.text__hashtags');
 const inputComment = document.querySelector('.text__description');
 
@@ -24,6 +27,24 @@ const sucessMessage = () => {
     sucessElement.remove();
   })
 }
+
+const errorMessage = () => {
+  closeFormCreate();
+  const errorElement = errorTemplate.cloneNode(true);
+  document.body.insertBefore(errorElement, document.body.lastChild);
+
+  const errorClose = errorElement.querySelector('.error__button');
+
+  errorClose.addEventListener('click', () => {
+    errorElement.remove();
+  })
+  document.addEventListener('keyup', (evt) => {
+    if (evt.key === Keys.ESC || evt.key === Keys.ESCAPE) {
+      errorElement.remove();
+    }
+  });
+}
+
 
 const clearInput = () => {
   inputComment.value = '';
@@ -50,7 +71,7 @@ const postData = (onSuccess) => {
    const formData = new FormData(evt.target);
 
    fetch(
-     'https://23.javascript.pages.academy/kekstagram',
+     'https://234.javascript.pages.academy/kekstagram',
      {
        method: 'POST',
        body: formData,
@@ -62,7 +83,8 @@ const postData = (onSuccess) => {
         sucessMessage();
         clearInput();
       } else {
-        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+        errorMessage();
+        clearInput();
       }
     })
     .catch(() => {
