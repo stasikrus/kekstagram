@@ -61,7 +61,6 @@ const getData = (onSuccess) => {
       console.log(error);
       showAlert(error);
     });
-
 }
 
 const postData = (onSuccess) => {
