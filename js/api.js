@@ -49,11 +49,11 @@ const errorMessage = () => {
 const clearInput = () => {
   inputComment.value = '';
   inputHashtag.value = '';
-}
+};
 
 
 const getData = (onSuccess) => {
-  fetch('https://23.javascript.pages.academy/kekstagram/data')
+  fetch('https://24.javascript.pages.academy/kekstagram/data')
     .then(checkStatus)
     .then((response) => response.json())
     .then((photos) => onSuccess(photos))
