@@ -6,6 +6,30 @@ const commentCount = fullPicture.querySelector('.social__comment-count');
 const commentsLoader = fullPicture.querySelector('.comments-loader');
 const bodyHtml = document.querySelector('body');
 
+const commentsButton = document.querySelector('.comments-loader');
+
+const ITEMS_COUNT_PER_CLICK = 5;
+
+
+
+const commentsButtonClick = () => {
+  const commentItem = document.querySelectorAll('.social__comment');
+
+  for (let i = ITEMS_COUNT_PER_CLICK; i < commentItem.length; i++) {
+      commentItem[i].classList.add('hidden');
+  }
+
+  if (ITEMS_COUNT_PER_CLICK < commentItem.length) {
+    commentsButton.classList.remove('hidden');
+
+    commentsButton.addEventListener('click', () => {
+      for (let i = ITEMS_COUNT_PER_CLICK; i <= ITEMS_COUNT_PER_CLICK + 5; i++) {
+        commentItem[i].classList.remove('hidden');
+      }
+    })
+  }
+}
+
 // Открыть большое изображение
 
 const openPreview = () => {
@@ -64,4 +88,4 @@ const show = (picture) => {
 
 };
 
-export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml, closePopup };
+export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml, closePopup, commentsButtonClick };
