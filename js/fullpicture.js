@@ -22,30 +22,34 @@ const commentsButtonClick = () => {
   if (ITEMS_COUNT_PER_CLICK < commentItem.length) {
     commentsButton.classList.remove('hidden');
 
+
     commentsButton.addEventListener('click', () => {
 
+      if ((commentItem.length - commentsCount) > ITEMS_COUNT_PER_CLICK) {
 
-      if ((commentItem.length - commentsCount) >= ITEMS_COUNT_PER_CLICK) {
         commentsCount += ITEMS_COUNT_PER_CLICK;
+
         for (let i = 0; i <= commentsCount - 1; i++) {
         commentItem[i].classList.remove('hidden');
         }
-        console.log(commentsCount);
-        console.log(commentItem.length);
+
       } else if ((commentItem.length - commentsCount) < ITEMS_COUNT_PER_CLICK) {
 
         for (let i = commentItem.length - 1; i >= commentItem.length - (commentItem.length - commentsCount); i--) {
           commentItem[i].classList.remove('hidden');
           commentsButton.classList.add('hidden');
         }
+      } else if (commentItem.length % 5 === 0) {
+        for (let i = commentItem.length - ITEMS_COUNT_PER_CLICK; i <= commentItem.length - 1; i++) {
+
+          commentItem[i].classList.remove('hidden');
+          commentsButton.classList.add('hidden');
+        }
       }
-
-
-
-      //console.log(commentsCount);
-      //console.log(commentItem.length);
-    })
-  }
+      console.log(commentItem.length);
+      console.log(commentsCount);
+    });
+  };
 
 
 };
@@ -73,6 +77,7 @@ const closePopup = () => {
   commentsLoader.classList.remove('hidden');
   bodyHtml.classList.remove('modal-open');
   commentsList.innerHTML = '';
+  commentsCount = 5;
 };
 
 const getComments = (comments) => {
