@@ -9,7 +9,7 @@ const bodyHtml = document.querySelector('body');
 const commentsButton = document.querySelector('.comments-loader');
 
 const ITEMS_COUNT_PER_CLICK = 5;
-
+let commentsCount = ITEMS_COUNT_PER_CLICK;
 
 
 const commentsButtonClick = () => {
@@ -17,18 +17,39 @@ const commentsButtonClick = () => {
 
   for (let i = ITEMS_COUNT_PER_CLICK; i < commentItem.length; i++) {
       commentItem[i].classList.add('hidden');
-  }
+  };
 
   if (ITEMS_COUNT_PER_CLICK < commentItem.length) {
     commentsButton.classList.remove('hidden');
 
     commentsButton.addEventListener('click', () => {
-      for (let i = ITEMS_COUNT_PER_CLICK; i <= ITEMS_COUNT_PER_CLICK + 5; i++) {
+
+
+      if ((commentItem.length - commentsCount) >= ITEMS_COUNT_PER_CLICK) {
+        commentsCount += ITEMS_COUNT_PER_CLICK;
+        for (let i = 0; i <= commentsCount - 1; i++) {
         commentItem[i].classList.remove('hidden');
+        }
+        console.log(commentsCount);
+        console.log(commentItem.length);
+      } else if ((commentItem.length - commentsCount) < ITEMS_COUNT_PER_CLICK) {
+
+        for (let i = commentItem.length - 1; i >= commentItem.length - (commentItem.length - commentsCount); i--) {
+          commentItem[i].classList.remove('hidden');
+          commentsButton.classList.add('hidden');
+        }
       }
+
+
+
+      //console.log(commentsCount);
+      //console.log(commentItem.length);
     })
   }
-}
+
+
+};
+
 
 // Открыть большое изображение
 
