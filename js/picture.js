@@ -1,4 +1,4 @@
-import { show, openPreview, getComments, hiddenBlocks, scrollOff } from './fullpicture.js';
+import { show, openPreview, getComments, hiddenBlocks, scrollOff, commentsButtonClick } from './fullpicture.js';
 
 
 const list = document.querySelector('.pictures');
@@ -35,6 +35,7 @@ const createPicture = (photo, compareFunction, photosAmount) => {
         scrollOff();
         show(picture);
         getComments(picture.comments);
+        commentsButtonClick();
       });
 
   similarListFragment.appendChild(pictureElement);
