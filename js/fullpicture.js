@@ -44,6 +44,7 @@ const getComments = (comments) => {
   });
 
   commentsList.appendChild(commentListFragment);
+
 };
 
 
@@ -61,7 +62,6 @@ const show = (picture) => {
       closePopup()
     }
   });
-
 };
 
 export { show, openPreview, getComments, hiddenBlocks, scrollOff, bodyHtml, closePopup };
