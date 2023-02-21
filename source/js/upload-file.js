@@ -1,4 +1,6 @@
 import { bodyHtml } from './fullpicture.js';
+import noUiSlider from 'nouislider';
+import 'nouislider/dist/nouislider.css';
 
 const uploadSection = document.querySelector('.img-upload');
 const uploadFile = uploadSection.querySelector('#upload-file');
@@ -198,3 +200,4 @@ uploadFile.addEventListener('change', () => {
 changeFilter();
 
 export { Keys, closeFormCreate };
+
